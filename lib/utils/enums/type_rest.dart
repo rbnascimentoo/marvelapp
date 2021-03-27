@@ -1,0 +1,6 @@
+enum TypeRest {
+
+  GET,
+  POST
+
+}
