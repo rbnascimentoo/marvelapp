@@ -21,7 +21,7 @@ class _MarvelState extends State<MarvelApp> {
     return MaterialApp(
       title: 'Marvel App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: ListMarvel(),
     );

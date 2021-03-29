@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/rafael/AndroidStudioProjects/marvel_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-zu/values-zu.xml",
+            "outputFile": "/home/rafael/AndroidStudioProjects/marvelapp/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-zu/values-zu.xml",
             "map": [
                 {
-                    "source": "/home/rafael/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/res/values-zu/values-zu.xml",
+                    "source": "/home/rafael/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/res/values-zu/values-zu.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

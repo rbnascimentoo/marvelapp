@@ -6,15 +6,9 @@ import 'package:marvel_app/models/marvel_base_response.dart';
 import 'package:marvel_app/ui/widget/item_list_marvel.dart';
 
 class ListMarvel extends StatelessWidget {
-
   CharacterBloc characterBloc = CharacterBloc();
 
   ListMarvel();
-
-  _onPress(int id) {
-    // characterBloc.getCharacter(id);
-    print(id);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,40 +17,47 @@ class ListMarvel extends StatelessWidget {
     return Container(
       color: Colors.red,
       child: StreamBuilder<ContainerData>(
-
         stream: characterBloc.output,
         builder: (context, snapshot) {
-
-          if(snapshot.hasError || !snapshot.hasData) {
+          if (snapshot.hasError) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                  Text("Não há registros!"),
+                Text(
+                  "Não há registros!",
+                  style: TextStyle(decoration: TextDecoration.none),
+                ),
               ],
             );
           }
 
-          return CarouselSlider(
-                items:
-                  snapshot.data.results.map((e) => Column(
-                    children: [
-                      ItemListMarvel(character: e, callback: _onPress)
-                    ],
-                  )).toList(),
-                options: CarouselOptions(
-                    height: 550.0,
-                    enlargeCenterPage: true,
-                    autoPlay: true,
-                    aspectRatio: 16 / 9,
-                    autoPlayCurve: Curves.slowMiddle,
-                    enableInfiniteScroll: false,
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
-                    viewportFraction: 0.8,
-                  ),
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.blueAccent,
+              ),
             );
-        },
+          }
 
+          return CarouselSlider(
+            items: snapshot.data.results
+                .map((e) => Column(
+                      children: [ItemListMarvel(character: e)],
+                    ))
+                .toList(),
+            options: CarouselOptions(
+              height: 600.0,
+              enlargeCenterPage: true,
+              autoPlay: false,
+              aspectRatio: 16 / 9,
+              autoPlayCurve: Curves.slowMiddle,
+              enableInfiniteScroll: false,
+              autoPlayAnimationDuration: Duration(milliseconds: 800),
+              viewportFraction: 0.8,
+            ),
+          );
+        },
       ),
     );
   }
