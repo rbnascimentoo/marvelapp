@@ -1,4 +1,4 @@
-# marvel_app
+# marvelapp
 
 A flutter application to list the marvel characters
 

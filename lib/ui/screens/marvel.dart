@@ -1,8 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:marvel_app/application/config.dart';
-import 'package:marvel_app/ui/widget/list_marvel.dart';
+import 'package:marvelapp/application/config.dart';
+import 'package:marvelapp/ui/widget/list_marvel.dart';
 
 class MarvelApp extends StatefulWidget {
 
@@ -23,6 +23,10 @@ class _MarvelState extends State<MarvelApp> {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
+      // initialRoute: '/',
+      // routes: {
+      //   '/': (context) => ListMarvel(),
+      // },
       home: ListMarvel(),
     );
   }

@@ -1,4 +1,4 @@
-br.com.rnascimento.marvel_app
+br.com.rnascimento.marvelapp
 attr alpha
 attr font
 attr fontProviderAuthority

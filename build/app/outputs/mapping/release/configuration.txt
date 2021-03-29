@@ -123,7 +123,7 @@
 # End of content from /home/rafael/snap/flutter/common/flutter/packages/flutter_tools/gradle/flutter_proguard_rules.pro
 # The proguard configuration file for the following section is /home/rafael/AndroidStudioProjects/marvelapp/build/app/intermediates/aapt_proguard_file/release/aapt_rules.txt
 -keep class androidx.core.app.CoreComponentFactory { <init>(); }
--keep class br.com.rnascimento.marvel_app.MainActivity { <init>(); }
+-keep class br.com.rnascimento.marvelapp.MainActivity { <init>(); }
 
 # End of content from /home/rafael/AndroidStudioProjects/marvelapp/build/app/intermediates/aapt_proguard_file/release/aapt_rules.txt
 # The proguard configuration file for the following section is /home/rafael/.gradle/caches/transforms-2/files-2.1/da310b12d325959a2e8cfc466fbff441/core-1.1.0/proguard.txt

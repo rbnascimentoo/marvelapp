@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:marvel_app/models/character.dart';
-import 'package:marvel_app/ui/screens/marvel.dart';
-import 'package:marvel_app/ui/screens/marvel_detail.dart';
+import 'package:marvelapp/models/character_response.dart';
+import 'package:marvelapp/ui/screens/marvel_detail.dart';
 
 class ItemListMarvel extends StatelessWidget {
   final Character character;
@@ -23,11 +22,11 @@ class ItemListMarvel extends StatelessWidget {
                 onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            MarvelDetail(character))), //callback(character.id),
+                        builder: (context) => MarvelDetail(character))),
+                //callback(character.id),
                 child: Card(
                   child: Container(
-                    height: 400,
+                    height: (MediaQuery.of(context).size.height) - 200,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.cover,
@@ -61,6 +60,7 @@ class ItemListMarvel extends StatelessWidget {
               ),
             ],
           ),
-        ));
+        ),
+    );
   }
 }

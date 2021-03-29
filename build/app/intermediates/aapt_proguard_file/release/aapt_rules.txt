@@ -1,2 +1,2 @@
 -keep class androidx.core.app.CoreComponentFactory { <init>(); }
--keep class br.com.rnascimento.marvel_app.MainActivity { <init>(); }
+-keep class br.com.rnascimento.marvelapp.MainActivity { <init>(); }

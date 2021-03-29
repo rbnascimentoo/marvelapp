@@ -2,12 +2,16 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:marvel_app/utils/constants/message_constants.dart';
-import 'package:marvel_app/utils/enums/type_rest.dart';
+import 'package:http_interceptor/http_client_with_interceptor.dart';
+import 'package:marvelapp/utils/constants/message_constants.dart';
+import 'package:marvelapp/utils/enums/type_rest.dart';
+import 'package:marvelapp/utils/interceptor_util.dart';
 
 class ServiceHttpUtil {
 
-  static const Map<String, String> headers = {'Content-Type' : 'application/json'};
+  static final http.Client client = HttpClientWithInterceptor.build(interceptors: [
+    ApiInterceptor(),
+  ]);
 
   static Future<dynamic> callService(
       bool isHttps, String host, TypeRest rest, String uri,
@@ -28,7 +32,7 @@ class ServiceHttpUtil {
         debugPrint('------------------------------- REQUEST GET --------------------------------');
         debugPrint('Link de conexão -> $url');
         debugPrint('----------------------------------------------------------------------------');
-        response = await http.get(url, headers: headers);
+        response = await client.get(url);
         break;
 
       case TypeRest.POST:
@@ -36,7 +40,7 @@ class ServiceHttpUtil {
         debugPrint('Link de conexão -> $url');
         debugPrint('POST -> $json');
         debugPrint('----------------------------------------------------------------------------');
-        response = await http.post(url, headers: headers, body: json);
+        response = await client.post(url, body: json);
         break;
 
         default:

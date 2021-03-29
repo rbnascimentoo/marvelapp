@@ -1,4 +1,5 @@
-import 'package:marvel_app/data/services/marvel_service.dart';
+import 'package:marvelapp/data/services/marvel_service.dart';
+import 'package:marvelapp/utils/constants/message_constants.dart';
 
 class CharactersRepository {
 
@@ -6,8 +7,8 @@ class CharactersRepository {
 
   CharactersRepository(this.marvelService);
 
-  Future<dynamic> getCharacters() async {
-    return await marvelService.getCharacters();
+  Future<dynamic> getCharacters(int limitQParam, int offsetQParam) async {
+    return await marvelService.getCharacters(limitQParam, offsetQParam);
   }
 
 }

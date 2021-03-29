@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="br.com.rnascimento.marvel_app"
+3    package="br.com.rnascimento.marvelapp"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -25,13 +25,13 @@
 19        android:debuggable="true"
 20        android:icon="@mipmap/ic_launcher"
 20-->/home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml:7:9-43
-21        android:label="marvel_app"
-21-->/home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml:6:9-35
+21        android:label="marvelapp"
+21-->/home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml:6:9-34
 22        android:usesCleartextTraffic="true" >
 22-->/home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml:8:9-44
 23        <activity
 23-->/home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml:10:9-38:20
-24            android:name="br.com.rnascimento.marvel_app.MainActivity"
+24            android:name="br.com.rnascimento.marvelapp.MainActivity"
 24-->/home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml:11:13-41
 25            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 25-->/home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml:14:13-163

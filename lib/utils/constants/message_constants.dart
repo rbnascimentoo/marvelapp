@@ -8,5 +8,6 @@ class MessageConstants {
   static const apikey2 = "939ce8f1659dfbc5019d79e259ce3989fae5f369";
   static const MARVEL_HOST = "gateway.marvel.com";
   static const MARVEL_CHARACTERS_PATH = "/v1/public/characters";
+  static const MARVEL_COMICS_PATH = "/comics";
 
 }
