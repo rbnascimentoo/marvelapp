@@ -12,19 +12,21 @@ class ItemListMarvel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        flex: 3,
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MarvelDetail(character))),
-                //callback(character.id),
-                child: Card(
+      flex: 3,
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MarvelDetail(character))),
+              //callback(character.id),
+              child: Card(
+                child: Hero(
+                  tag: character.id,
                   child: Container(
                     height: (MediaQuery.of(context).size.height) - 200,
                     decoration: BoxDecoration(
@@ -39,28 +41,29 @@ class ItemListMarvel extends StatelessWidget {
                       ),
                     ),
                   ),
-                  elevation: 8,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                ),
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              Tooltip(
-                message: character.name,
-                child: Text(
-                  character.name,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontStyle: FontStyle.normal,
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      decoration: TextDecoration.none),
-                ),
+            ),
+            Tooltip(
+              message: character.name,
+              child: Text(
+                character.name,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontStyle: FontStyle.normal,
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    decoration: TextDecoration.none),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
     );
   }
 }

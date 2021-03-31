@@ -4,19 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:marvelapp/bloc/character_bloc.dart';
 import 'package:marvelapp/models/character_response.dart';
 import 'package:marvelapp/ui/widget/item_list_marvel.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class ListMarvel extends StatelessWidget {
   CharacterBloc characterBloc = CharacterBloc();
 
   int offset = 0;
   int limit = 20;
+  int perPage = 20;
 
   ListMarvel();
 
   @override
   Widget build(BuildContext context) {
-
     final CarouselController _controllerCarousel = CarouselController();
+
+    context.showLoaderOverlay(
+      widget: Text(
+        "Loading...",
+        style: TextStyle(color: Colors.blueAccent),
+      ),
+    );
 
     characterBloc.getList(null, limitQParam: limit, offsetQParam: offset);
 
@@ -26,6 +34,7 @@ class ListMarvel extends StatelessWidget {
         stream: characterBloc.output,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
+            context.hideLoaderOverlay();
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,13 +48,18 @@ class ListMarvel extends StatelessWidget {
           }
 
           if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.blueAccent,
+            context.showLoaderOverlay(
+              widget: Text(
+                "Loading...",
+                style: TextStyle(color: Colors.blueAccent),
               ),
+            );
+            return Container(
+              color: Colors.red,
             );
           }
 
+          context.hideLoaderOverlay();
           return SingleChildScrollView(
             child: Column(
               children: [
@@ -66,16 +80,26 @@ class ListMarvel extends StatelessWidget {
                     enableInfiniteScroll: false,
                     autoPlayAnimationDuration: Duration(milliseconds: 800),
                     viewportFraction: 0.8,
-                    onPageChanged: (index, reason) {
+                    onPageChanged: (index, reason) async {
                       if (index == snapshot.data.length - 1) {
-                        CircularProgressIndicator(
-                          backgroundColor: Colors.blueAccent,
+
+                        context.showLoaderOverlay(
+                          widget: Text(
+                            "Loading...",
+                            style: TextStyle(color: Colors.blueAccent),
+                          ),
                         );
-                        offset = offset + limit;
-                        limit = limit + limit;
-                        characterBloc.getList(null, limitQParam: limit, offsetQParam: offset);
-                        CircularProgressIndicator(
-                          backgroundColor: Colors.blueAccent,
+
+                        offset = offset + perPage;
+                        limit = limit + perPage;
+                        characterBloc.getList(null,
+                            limitQParam: limit, offsetQParam: offset);
+
+                        context.showLoaderOverlay(
+                          widget: Text(
+                            "Loading...",
+                            style: TextStyle(color: Colors.blueAccent),
+                          ),
                         );
                       }
                     },

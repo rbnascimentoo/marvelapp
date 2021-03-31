@@ -1,7 +1,7 @@
 import 'package:marvelapp/models/character_response.dart';
 
 class Comics {
-  final String id;
+  final int id;
   final String title;
   final String description;
   final Thumbnail thumbnail;

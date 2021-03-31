@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marvelapp/models/character_response.dart';
+import 'package:marvelapp/models/comic_response.dart';
 
 class ItemCarouselMarvel<T> extends StatelessWidget {
 
@@ -10,10 +11,10 @@ class ItemCarouselMarvel<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Character character;
+    Comics comics;
 
-    if (model is Character) {
-      character = model as Character;
+    if (model is Comics) {
+      comics = model as Comics;
     }
 
     return Expanded(
@@ -25,16 +26,14 @@ class ItemCarouselMarvel<T> extends StatelessWidget {
             children: [
                 Card(
                   child: Container(
-                    height: 150,
+                    height: 200,
+                    // width: 10,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image:
-                        // model.thumbnail != null
-                        //     ? NetworkImage(model.thumbnail.path +
-                        //     "." +
-                        //     model.thumbnail.extension)
-                        //     :
+                        fit: BoxFit.fill,
+                        image: comics != null ? comics.thumbnail != null ? NetworkImage(comics.thumbnail.path +
+                            "." +
+                            comics.thumbnail.extension) : null :
                         NetworkImage(
                             "https://abrakadabra.vteximg.com.br/arquivos/ids/235915/banner_640x500_hotsite_marvel.jpg?v=637302469381230000"),
                       ),
@@ -46,13 +45,13 @@ class ItemCarouselMarvel<T> extends StatelessWidget {
                   ),
                 ),
               Tooltip(
-                message: "dfsd",
+                message: comics != null ? comics.title : 'No Title',
                 child: Text(
-                  "dfsdfsd",
+                  comics != null ? comics.title : 'No Title',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontStyle: FontStyle.normal,
-                      fontSize: 26,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                       decoration: TextDecoration.none),

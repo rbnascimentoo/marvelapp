@@ -20,6 +20,25 @@ class _MarvelDetailState extends State<MarvelDetail> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.character.name),
+        actions: [
+          Hero(
+            tag: widget.character.id,
+            child: Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: widget.character.thumbnail != null
+                      ? NetworkImage(widget.character.thumbnail.path +
+                      "." +
+                      widget.character.thumbnail.extension)
+                      : NetworkImage(
+                      "https://abrakadabra.vteximg.com.br/arquivos/ids/235915/banner_640x500_hotsite_marvel.jpg?v=637302469381230000"),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Container(
         padding: EdgeInsets.all(10),
@@ -29,10 +48,9 @@ class _MarvelDetailState extends State<MarvelDetail> {
             Text(
               widget.character.description,
               style: TextStyle(
-                decoration: TextDecoration.none,
-                fontSize: 20,
-                fontWeight: FontWeight.w300
-              ),
+                  decoration: TextDecoration.none,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300),
             ),
             SizedBox(
               height: 50,
@@ -44,7 +62,8 @@ class _MarvelDetailState extends State<MarvelDetail> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
-            CarouselMarvel<Comics>(idCharacter: widget.character.id.toString(),
+            CarouselMarvel<Comics>(
+                idCharacter: widget.character.id.toString(),
                 bloc: ComicsBloc()),
             SizedBox(
               height: 1,
@@ -56,7 +75,8 @@ class _MarvelDetailState extends State<MarvelDetail> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
-            CarouselMarvel<Comics>(idCharacter: widget.character.id.toString(),
+            CarouselMarvel<Comics>(
+                idCharacter: widget.character.id.toString(),
                 bloc: ComicsBloc()),
             SizedBox(
               height: 1,
@@ -68,7 +88,8 @@ class _MarvelDetailState extends State<MarvelDetail> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
-            CarouselMarvel<Comics>(idCharacter: widget.character.id.toString(),
+            CarouselMarvel<Comics>(
+                idCharacter: widget.character.id.toString(),
                 bloc: ComicsBloc()),
           ],
         ),

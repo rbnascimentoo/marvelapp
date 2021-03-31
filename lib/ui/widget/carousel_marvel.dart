@@ -6,7 +6,6 @@ import 'package:marvelapp/bloc/base_bloc.dart';
 import 'package:marvelapp/ui/widget/item_carousel_marvel.dart';
 
 class CarouselMarvel<T> extends StatelessWidget {
-
   BaseBloc bloc;
   String idCharacter;
   int offset = 0;
@@ -19,7 +18,7 @@ class CarouselMarvel<T> extends StatelessWidget {
     final CarouselController _controllerCarousel = CarouselController();
 
     bloc.getList(idCharacter, limitQParam: limit, offsetQParam: offset);
-    
+
     return Container(
       child: StreamBuilder<List<T>>(
         stream: bloc.output,
@@ -52,10 +51,11 @@ class CarouselMarvel<T> extends StatelessWidget {
                   carouselController: _controllerCarousel,
                   items: snapshot.data
                       .map((e) => Column(
-                    children: [ItemCarouselMarvel(model: e)],
-                  ))
+                            children: [
+                              ItemCarouselMarvel(model: e)
+                            ],
+                          ))
                       .toList(),
-
                   options: CarouselOptions(
                     initialPage: 0,
                     height: 300,
@@ -67,7 +67,7 @@ class CarouselMarvel<T> extends StatelessWidget {
                     autoPlayAnimationDuration: Duration(milliseconds: 800),
                     viewportFraction: 0.8,
                     onPageChanged: (index, reason) {
-                      Center(
+                      return Center(
                         child: CircularProgressIndicator(
                           backgroundColor: Colors.blueAccent,
                         ),
@@ -82,5 +82,4 @@ class CarouselMarvel<T> extends StatelessWidget {
       ),
     );
   }
-
 }

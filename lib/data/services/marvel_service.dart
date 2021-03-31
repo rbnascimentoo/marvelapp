@@ -21,7 +21,7 @@ class MarvelService {
         true,
         MessageConstants.MARVEL_HOST,
         TypeRest.GET,
-        MessageConstants.MARVEL_CHARACTERS_PATH+'/'+idCharacter+MessageConstants.MARVEL_COMICS_PATH,
+        MessageConstants.MARVEL_CHARACTERS_PATH + '/' + idCharacter + MessageConstants.MARVEL_COMICS_PATH,
         qParam: {'limit' : limitQParam.toString(), 'offset' :  offsetQParam.toString()});
 
   }

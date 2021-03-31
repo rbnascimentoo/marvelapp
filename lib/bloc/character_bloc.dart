@@ -21,8 +21,8 @@ class CharacterBloc extends BaseBloc<List<Character>> {
   getList(String idCharacter, {int limitQParam, int offsetQParam}) async {
     try {
       var result = await charactersRepository.getCharacters(limitQParam, offsetQParam);
-      MarvelBaseResponse<Character> response = MarvelBaseResponse<Character>.fromJson(result);
-      listCharacter.addAll(response.data.results);
+      MarvelBaseResponse response = MarvelBaseResponse.fromJsonToCharacter(result);
+      listCharacter.addAll(response.data.results as List<Character>);
       add(listCharacter);
       return response.data;
     }catch (e) {

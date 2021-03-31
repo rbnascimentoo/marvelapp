@@ -152,6 +152,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_spinkit",
+      "rootUri": "file:///home/rafael/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_spinkit-4.1.2+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.5"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///home/rafael/snap/flutter/common/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -184,6 +190,12 @@
     {
       "name": "json_annotation",
       "rootUri": "file:///home/rafael/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "loader_overlay",
+      "rootUri": "file:///home/rafael/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/loader_overlay-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -326,7 +338,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-03-29T14:10:37.783750Z",
+  "generated": "2021-03-30T14:23:59.551443Z",
   "generator": "pub",
   "generatorVersion": "2.12.1"
 }
