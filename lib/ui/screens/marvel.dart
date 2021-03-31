@@ -23,6 +23,9 @@ class _MarvelState extends State<MarvelApp> {
         theme: ThemeData(
           primarySwatch: Colors.red,
         ),
+        debugShowCheckedModeBanner: false,
+        //Loading screen
+        //TODO utilizar route
         home: LoaderOverlay(
           overlayWidget: Center(
             child: SpinKitSquareCircle(

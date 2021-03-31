@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:marvelapp/models/character_response.dart';
 import 'package:marvelapp/ui/screens/marvel_detail.dart';
 
+//Item list character marvel
 class ItemListMarvel extends StatelessWidget {
   final Character character;
 
@@ -22,6 +23,7 @@ class ItemListMarvel extends StatelessWidget {
               onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
+                    //TODO utilizar route
                       builder: (context) => MarvelDetail(character))),
               //callback(character.id),
               child: Card(

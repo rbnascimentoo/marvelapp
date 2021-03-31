@@ -26,5 +26,25 @@ class MarvelService {
 
   }
 
+  Future<dynamic> getStories(String idCharacter, int limitQParam , int offsetQParam) async {
+    return await ServiceHttpUtil.callService(
+        true,
+        MessageConstants.MARVEL_HOST,
+        TypeRest.GET,
+        MessageConstants.MARVEL_CHARACTERS_PATH + '/' + idCharacter + MessageConstants.MARVEL_STORIES_PATH,
+        qParam: {'limit' : limitQParam.toString(), 'offset' :  offsetQParam.toString()});
+
+  }
+
+  Future<dynamic> getSeries(String idCharacter, int limitQParam , int offsetQParam) async {
+    return await ServiceHttpUtil.callService(
+        true,
+        MessageConstants.MARVEL_HOST,
+        TypeRest.GET,
+        MessageConstants.MARVEL_CHARACTERS_PATH + '/' + idCharacter + MessageConstants.MARVEL_SERIES_PATH,
+        qParam: {'limit' : limitQParam.toString(), 'offset' :  offsetQParam.toString()});
+
+  }
+
 
 }

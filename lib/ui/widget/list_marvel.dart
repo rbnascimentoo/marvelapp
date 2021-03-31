@@ -6,6 +6,7 @@ import 'package:marvelapp/models/character_response.dart';
 import 'package:marvelapp/ui/widget/item_list_marvel.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
+//Widget principal screen
 class ListMarvel extends StatelessWidget {
   CharacterBloc characterBloc = CharacterBloc();
 
@@ -18,6 +19,7 @@ class ListMarvel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CarouselController _controllerCarousel = CarouselController();
+    int _current = 0;
 
     context.showLoaderOverlay(
       widget: Text(
@@ -82,7 +84,6 @@ class ListMarvel extends StatelessWidget {
                     viewportFraction: 0.8,
                     onPageChanged: (index, reason) async {
                       if (index == snapshot.data.length - 1) {
-
                         context.showLoaderOverlay(
                           widget: Text(
                             "Loading...",
@@ -92,7 +93,7 @@ class ListMarvel extends StatelessWidget {
 
                         offset = offset + perPage;
                         limit = limit + perPage;
-                        characterBloc.getList(null,
+                        await characterBloc.getList(null,
                             limitQParam: limit, offsetQParam: offset);
 
                         context.showLoaderOverlay(

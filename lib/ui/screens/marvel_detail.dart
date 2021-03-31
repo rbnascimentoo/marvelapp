@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marvelapp/bloc/comics_bloc.dart';
+import 'package:marvelapp/bloc/series_bloc.dart';
+import 'package:marvelapp/bloc/stories_bloc.dart';
 import 'package:marvelapp/models/character_response.dart';
 import 'package:marvelapp/models/comic_response.dart';
+import 'package:marvelapp/models/series_response.dart';
+import 'package:marvelapp/models/stories_response.dart';
 import 'package:marvelapp/ui/widget/carousel_marvel.dart';
 
+//Second screen - details characters marvel
 class MarvelDetail extends StatefulWidget {
   Character character;
 
@@ -75,9 +80,9 @@ class _MarvelDetailState extends State<MarvelDetail> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
-            CarouselMarvel<Comics>(
+            CarouselMarvel<Series>(
                 idCharacter: widget.character.id.toString(),
-                bloc: ComicsBloc()),
+                bloc: SeriesBloc()),
             SizedBox(
               height: 1,
             ),
@@ -88,9 +93,9 @@ class _MarvelDetailState extends State<MarvelDetail> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
-            CarouselMarvel<Comics>(
+            CarouselMarvel<Stories>(
                 idCharacter: widget.character.id.toString(),
-                bloc: ComicsBloc()),
+                bloc: StoriesBloc()),
           ],
         ),
       ),

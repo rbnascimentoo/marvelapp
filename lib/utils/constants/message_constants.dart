@@ -11,5 +11,7 @@ class MessageConstants {
   static const MARVEL_HOST = "gateway.marvel.com";
   static const MARVEL_CHARACTERS_PATH = "/v1/public/characters";
   static const MARVEL_COMICS_PATH = "/comics";
+  static const MARVEL_STORIES_PATH = "/stories";
+  static const MARVEL_SERIES_PATH = "/series";
 
 }

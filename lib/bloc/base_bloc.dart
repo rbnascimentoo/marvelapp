@@ -2,7 +2,7 @@ import 'dart:async';
 
 class BaseBloc<T> {
 
-  final StreamController _controller = StreamController<T>.broadcast();
+  StreamController _controller = StreamController<T>.broadcast();
 
   init() {
     _controller.stream.listen(add);

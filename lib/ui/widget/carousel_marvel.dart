@@ -3,9 +3,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marvelapp/bloc/base_bloc.dart';
-import 'package:marvelapp/ui/widget/item_carousel_marvel.dart';
+import 'package:marvelapp/models/comic_response.dart';
+import 'package:marvelapp/models/series_response.dart';
+import 'package:marvelapp/models/stories_response.dart';
+import 'package:marvelapp/ui/widget/item_list_comics.dart';
+import 'package:marvelapp/ui/widget/item_list_series.dart';
+import 'package:marvelapp/ui/widget/item_list_stories.dart';
 
 class CarouselMarvel<T> extends StatelessWidget {
+
   BaseBloc bloc;
   String idCharacter;
   int offset = 0;
@@ -15,7 +21,7 @@ class CarouselMarvel<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CarouselController _controllerCarousel = CarouselController();
+    CarouselController _controllerCarousel = CarouselController();
 
     bloc.getList(idCharacter, limitQParam: limit, offsetQParam: offset);
 
@@ -50,11 +56,20 @@ class CarouselMarvel<T> extends StatelessWidget {
                 CarouselSlider(
                   carouselController: _controllerCarousel,
                   items: snapshot.data
-                      .map((e) => Column(
-                            children: [
-                              ItemCarouselMarvel(model: e)
-                            ],
-                          ))
+                      .map((e) {
+                        if(e is Comics) {
+                          return ItemListComics(e);
+                        }
+
+                        if(e is Series) {
+                          return ItemListSeries(e);
+                        }
+
+                        if(e is Stories) {
+                          return ItemListStories(e);
+                        }
+
+                      })
                       .toList(),
                   options: CarouselOptions(
                     initialPage: 0,

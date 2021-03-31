@@ -1,5 +1,7 @@
 import 'package:marvelapp/models/character_response.dart';
 import 'package:marvelapp/models/comic_response.dart';
+import 'package:marvelapp/models/series_response.dart';
+import 'package:marvelapp/models/stories_response.dart';
 
 class MarvelBaseResponse {
   int code; //	int	The HTTP status code of the returned result
@@ -44,6 +46,32 @@ class MarvelBaseResponse {
             : null,
         etag: json['etag']);
   }
+
+  factory MarvelBaseResponse.fromJsonToSeries(dynamic json) {
+    return MarvelBaseResponse(
+        code: json['code'],
+        status: json['status'],
+        copyright: json['copyright'],
+        attributionText: json['attributionText'],
+        attributionHTML: json['attributionHTML'],
+        data: json['data'] != null
+            ? ContainerData.fromJsonToSeries(json['data'])
+            : null,
+        etag: json['etag']);
+  }
+
+  factory MarvelBaseResponse.fromJsonToStories(dynamic json) {
+    return MarvelBaseResponse(
+        code: json['code'],
+        status: json['status'],
+        copyright: json['copyright'],
+        attributionText: json['attributionText'],
+        attributionHTML: json['attributionHTML'],
+        data: json['data'] != null
+            ? ContainerData.fromJsonToStories(json['data'])
+            : null,
+        etag: json['etag']);
+  }
 }
 
 class ContainerData {
@@ -76,6 +104,28 @@ class ContainerData {
         count: json['count'],
         results: json['results'] != null
             ? (json['results'] as List).map((i) => Comics.fromJson(i)).toList()
+            : null);
+  }
+
+  factory ContainerData.fromJsonToSeries(dynamic json) {
+    return ContainerData(
+        offset: json['offset'],
+        limit: json['limit'],
+        total: json['total'],
+        count: json['count'],
+        results: json['results'] != null
+            ? (json['results'] as List).map((i) => Series.fromJson(i)).toList()
+            : null);
+  }
+
+  factory ContainerData.fromJsonToStories(dynamic json) {
+    return ContainerData(
+        offset: json['offset'],
+        limit: json['limit'],
+        total: json['total'],
+        count: json['count'],
+        results: json['results'] != null
+            ? (json['results'] as List).map((i) => Stories.fromJson(i)).toList()
             : null);
   }
 
