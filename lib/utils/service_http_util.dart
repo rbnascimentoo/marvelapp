@@ -10,8 +10,6 @@ import 'package:path_provider/path_provider.dart';
 
 class ServiceHttpUtil {
 
-
-
   static final http.Client client = HttpClientWithInterceptor.build(interceptors: [
     ApiInterceptor(),
   ]);
@@ -29,11 +27,8 @@ class ServiceHttpUtil {
     var cacheDir = await getTemporaryDirectory();
 
     if(await File(cacheDir.path + '/' + filename).exists()) {
-      print('encontrou cahce');
       return jsonDecode(File(cacheDir.path + '/' + filename).readAsStringSync());
     }
-
-    print('nao encontrou cahce');
 
     Uri url = isHttps
         ? Uri.https(host, uri, qParam)
@@ -68,11 +63,9 @@ class ServiceHttpUtil {
        throw msgFailure;
     }
 
-    print('salvando cache');
     var tempDir = await getTemporaryDirectory();
     File file = new File(tempDir.path + '/' + filename);
     file.writeAsString(response.body, flush: true, mode: FileMode.write);
-    print('salvou cahce');
 
     return jsonDecode(response.body);
 
