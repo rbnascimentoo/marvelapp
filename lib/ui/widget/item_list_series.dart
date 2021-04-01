@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:marvelapp/models/comic_response.dart';
 import 'package:marvelapp/models/series_response.dart';
 
 class ItemListSeries extends StatelessWidget {
@@ -11,14 +10,15 @@ class ItemListSeries extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: Key('containerItemListCarouselDetailsSeries${series.id}'),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Card(
+            key: Key('cardItemListCarouselDetailsSeries${series.id}'),
             child: Container(
-              height: 200,
-              // width: 10,
+              height: 180,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.fill,
@@ -37,9 +37,11 @@ class ItemListSeries extends StatelessWidget {
             ),
           ),
           Tooltip(
+            key: Key('tooltipTitleCardDetail'),
             message: series != null ? series.title : 'No Title',
             child: Text(
               series != null ? series.title : 'No Title',
+              key: Key('textTitleCardDetail${series.title}'),
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontStyle: FontStyle.normal,

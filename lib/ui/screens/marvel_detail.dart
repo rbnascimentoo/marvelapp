@@ -20,25 +20,36 @@ class MarvelDetail extends StatefulWidget {
 }
 
 class _MarvelDetailState extends State<MarvelDetail> {
+
   @override
   Widget build(BuildContext context) {
+
+    bool existDescription = widget.character.description != null && widget.character.description.isNotEmpty;
+
     return Scaffold(
+      key: Key('scaffoldDetailItemListMarvel${widget.character.id}'),
       appBar: AppBar(
-        title: Text(widget.character.name),
+        key: Key('appBarDetailItem${widget.character.id}'),
+        title: Text(
+          widget.character.name,
+          key: Key('textTitle${widget.character.id}'),
+        ),
         actions: [
           Hero(
+            key: Key('heroDetailItemList${widget.character.id}'),
             tag: widget.character.id,
             child: Container(
-              height: 50,
-              width: 50,
+              key: Key('containerHeroDetail${widget.character.id}'),
+              height: 55,
+              width: 55,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: widget.character.thumbnail != null
                       ? NetworkImage(widget.character.thumbnail.path +
-                      "." +
-                      widget.character.thumbnail.extension)
+                          "." +
+                          widget.character.thumbnail.extension)
                       : NetworkImage(
-                      "https://abrakadabra.vteximg.com.br/arquivos/ids/235915/banner_640x500_hotsite_marvel.jpg?v=637302469381230000"),
+                          "https://abrakadabra.vteximg.com.br/arquivos/ids/235915/banner_640x500_hotsite_marvel.jpg?v=637302469381230000"),
                 ),
               ),
             ),
@@ -46,59 +57,50 @@ class _MarvelDetailState extends State<MarvelDetail> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(10),
-        height: (MediaQuery.of(context).size.height),
-        child: ListView(
-          children: [
-            Text(
-              widget.character.description,
-              style: TextStyle(
+          key: Key('containerBodyDetail${widget.character.id}'),
+          padding: EdgeInsets.all(10),
+          height: (MediaQuery.of(context).size.height),
+          child: ListView(
+            key: Key('listViewDetail${widget.character.id}'),
+            children: [
+              existDescription ?
+              Text(
+                widget.character.description,
+                key: Key('textDescriptionDetail${widget.character.id}'),
+                style: TextStyle(
                   decoration: TextDecoration.none,
                   fontSize: 20,
-                  fontWeight: FontWeight.w300),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Text(
-              "Comics",
-              style: TextStyle(
-                  decoration: TextDecoration.none,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-            ),
-            CarouselMarvel<Comics>(
+                  fontWeight: FontWeight.w300,
+                ),
+              ) : Text(''),
+              SizedBox(
+                key: Key('sizeBoxComics${widget.character.id}'),
+                height: existDescription ? 50 : 0,
+              ),
+              CarouselMarvel<Comics>(
                 idCharacter: widget.character.id.toString(),
-                bloc: ComicsBloc()),
-            SizedBox(
-              height: 1,
-            ),
-            Text(
-              "Series",
-              style: TextStyle(
-                  decoration: TextDecoration.none,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-            ),
-            CarouselMarvel<Series>(
+                bloc: ComicsBloc(),
+                title: 'Comics',
+              ),
+              SizedBox(
+                height: 1,
+              ),
+              CarouselMarvel<Series>(
                 idCharacter: widget.character.id.toString(),
-                bloc: SeriesBloc()),
-            SizedBox(
-              height: 1,
-            ),
-            Text(
-              "Stories",
-              style: TextStyle(
-                  decoration: TextDecoration.none,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-            ),
-            CarouselMarvel<Stories>(
+                bloc: SeriesBloc(),
+                title: 'Series',
+              ),
+              SizedBox(
+                height: 1,
+              ),
+              CarouselMarvel<Stories>(
                 idCharacter: widget.character.id.toString(),
-                bloc: StoriesBloc()),
-          ],
+                bloc: StoriesBloc(),
+                title: 'Stories',
+              ),
+            ],
+          ),
         ),
-      ),
     );
   }
 }

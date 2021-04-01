@@ -1,13 +1,16 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_interceptor/http_client_with_interceptor.dart';
 import 'package:marvelapp/utils/constants/message_constants.dart';
 import 'package:marvelapp/utils/enums/type_rest.dart';
 import 'package:marvelapp/utils/interceptor_util.dart';
+import 'package:path_provider/path_provider.dart';
 
 class ServiceHttpUtil {
+
+
 
   static final http.Client client = HttpClientWithInterceptor.build(interceptors: [
     ApiInterceptor(),
@@ -20,6 +23,17 @@ class ServiceHttpUtil {
         String msgTimeOut = MessageConstants.timeoutError,
         String msgFailure = MessageConstants.communicationError,
         Map<String, dynamic> qParam}) async {
+
+    String filename =  uri.replaceAll('/', '-') + '${qParam['limit']}${qParam['offset']}';
+
+    var cacheDir = await getTemporaryDirectory();
+
+    if(await File(cacheDir.path + '/' + filename).exists()) {
+      print('encontrou cahce');
+      return jsonDecode(File(cacheDir.path + '/' + filename).readAsStringSync());
+    }
+
+    print('nao encontrou cahce');
 
     Uri url = isHttps
         ? Uri.https(host, uri, qParam)
@@ -53,6 +67,12 @@ class ServiceHttpUtil {
     if (response.statusCode != 200) {
        throw msgFailure;
     }
+
+    print('salvando cache');
+    var tempDir = await getTemporaryDirectory();
+    File file = new File(tempDir.path + '/' + filename);
+    file.writeAsString(response.body, flush: true, mode: FileMode.write);
+    print('salvou cahce');
 
     return jsonDecode(response.body);
 

@@ -8,14 +8,14 @@ import 'package:marvelapp/models/character_response.dart';
 import 'package:marvelapp/models/comic_response.dart';
 import 'package:marvelapp/models/marvel_base_response.dart';
 
-class ComicsBloc extends BaseBloc<List<Comics>> {
+class ComicsBloc extends BaseBloc<Set<Comics>> {
 
   ComicsRepository comicsRepository;
-  List<Comics> listComics;
+  Set<Comics> listComics;
 
   ComicsBloc() {
     comicsRepository = ComicsRepository(MarvelService());
-    listComics = [];
+    listComics = {};
   }
   
   @override
@@ -23,7 +23,7 @@ class ComicsBloc extends BaseBloc<List<Comics>> {
     try {
       var result = await comicsRepository.getComics(idCharacter, limitQParam, offsetQParam);
       MarvelBaseResponse response = MarvelBaseResponse.fromJsonToComics(result);
-      listComics.addAll(response.data.results as List<Comics>);
+      listComics.addAll(response.data.results as Set<Comics>);
       add(listComics);
       return response.data;
     }catch (e) {

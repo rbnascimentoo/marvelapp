@@ -75,11 +75,11 @@ class MarvelBaseResponse {
 }
 
 class ContainerData {
-  final int offset; //	int	The requested offset (skipped results) of the call
-  final int limit; //	int	The requested result limit
-  final int total; //	int	The total number of results available
-  final int count; //int	The total number of results returned by this call
-  final List
+  int offset; //	int	The requested offset (skipped results) of the call
+  int limit; //	int	The requested result limit
+  int total; //	int	The total number of results available
+  int count; //int	The total number of results returned by this call
+  Set
       results; //Array[entity type]	The list of entities returned by the call
 
   ContainerData(
@@ -92,7 +92,7 @@ class ContainerData {
         total: json['total'],
         count: json['count'],
         results: json['results'] != null
-            ? (json['results'] as List).map((i) => Character.fromJson(i)).toList()
+            ? (json['results'] as List).map((i) => Character.fromJson(i)).toSet()
             : null);
   }
 
@@ -103,7 +103,7 @@ class ContainerData {
         total: json['total'],
         count: json['count'],
         results: json['results'] != null
-            ? (json['results'] as List).map((i) => Comics.fromJson(i)).toList()
+            ? (json['results'] as List).map((i) => Comics.fromJson(i)).toSet()
             : null);
   }
 
@@ -114,7 +114,7 @@ class ContainerData {
         total: json['total'],
         count: json['count'],
         results: json['results'] != null
-            ? (json['results'] as List).map((i) => Series.fromJson(i)).toList()
+            ? (json['results'] as List).map((i) => Series.fromJson(i)).toSet()
             : null);
   }
 
@@ -125,7 +125,7 @@ class ContainerData {
         total: json['total'],
         count: json['count'],
         results: json['results'] != null
-            ? (json['results'] as List).map((i) => Stories.fromJson(i)).toList()
+            ? (json['results'] as List).map((i) => Stories.fromJson(i)).toSet()
             : null);
   }
 

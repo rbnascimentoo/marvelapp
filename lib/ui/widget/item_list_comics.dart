@@ -9,14 +9,15 @@ class ItemListComics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: Key('containerItemListCarouselDetailsComics${comics.id}'),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Card(
+            key: Key('cardItemListCarouselDetailsComics${comics.id}'),
             child: Container(
-              height: 200,
-              // width: 10,
+              height: 180,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.fill,
@@ -35,9 +36,11 @@ class ItemListComics extends StatelessWidget {
             ),
           ),
           Tooltip(
+            key: Key('tooltipTitleCardDetail'),
             message: comics != null ? comics.title : 'No Title',
             child: Text(
               comics != null ? comics.title : 'No Title',
+              key: Key('textTitleCardDetail${comics.title}'),
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontStyle: FontStyle.normal,

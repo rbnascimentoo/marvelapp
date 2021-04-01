@@ -7,12 +7,16 @@ import 'package:marvelapp/utils/service_http_util.dart';
 class MarvelService {
 
   Future<dynamic> getCharacters(int limitQParam , int offsetQParam) async {
-    return await ServiceHttpUtil.callService(
-        true,
-        MessageConstants.MARVEL_HOST,
-        TypeRest.GET,
-        MessageConstants.MARVEL_CHARACTERS_PATH,
-        qParam: {'limit' : limitQParam.toString(), 'offset' :  offsetQParam.toString()});
+    try {
+      return await ServiceHttpUtil.callService(
+          true,
+          MessageConstants.MARVEL_HOST,
+          TypeRest.GET,
+          MessageConstants.MARVEL_CHARACTERS_PATH,
+          qParam: {'limit' : limitQParam.toString(), 'offset' :  offsetQParam.toString()});
+    } catch(e) {
+      return '{}';
+    }
 
   }
 

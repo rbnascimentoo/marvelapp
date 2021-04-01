@@ -14,27 +14,29 @@ class MarvelApp extends StatefulWidget {
 class _MarvelState extends State<MarvelApp> {
   @override
   Widget build(BuildContext context) {
-
     //Set Configurations
     var config = Config();
 
     return MaterialApp(
-        title: 'Marvel App',
-        theme: ThemeData(
-          primarySwatch: Colors.red,
-        ),
-        debugShowCheckedModeBanner: false,
-        //Loading screen
-        //TODO utilizar route
-        home: LoaderOverlay(
-          overlayWidget: Center(
-            child: SpinKitSquareCircle(
-              color: Colors.blueAccent,
-              size: 50,
-            ),
+      key: Key('materialApp'),
+      title: 'Marvel App',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      debugShowCheckedModeBanner: false,
+      //Loading screen
+      //TODO utilizar route
+      home: LoaderOverlay(
+        overlayWidget: Center(
+          child: SpinKitSquareCircle(
+            key: Key('spinKitSquareCicle'),
+            color: Colors.blueAccent,
+            size: 50,
           ),
-          overlayOpacity: 0.8,
-          child: ListMarvel(),
-        ));
+        ),
+        overlayOpacity: 0.8,
+        child: ListMarvel(),
+      ),
+    );
   }
 }

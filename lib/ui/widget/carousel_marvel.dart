@@ -11,13 +11,15 @@ import 'package:marvelapp/ui/widget/item_list_series.dart';
 import 'package:marvelapp/ui/widget/item_list_stories.dart';
 
 class CarouselMarvel<T> extends StatelessWidget {
-
   BaseBloc bloc;
   String idCharacter;
+  String title;
+
   int offset = 0;
   int limit = 20;
+  int perPage = 20;
 
-  CarouselMarvel({this.idCharacter, this.bloc});
+  CarouselMarvel({this.idCharacter, this.bloc, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -26,75 +28,97 @@ class CarouselMarvel<T> extends StatelessWidget {
     bloc.getList(idCharacter, limitQParam: limit, offsetQParam: offset);
 
     return Container(
-      child: StreamBuilder<List<T>>(
-        stream: bloc.output,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  "Não há registros!",
-                  style: TextStyle(decoration: TextDecoration.none),
-                ),
-              ],
-            );
-          }
-
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.blueAccent,
+        key: Key('containerCarouselDetailItem$idCharacter'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              key: Key('textComicsDetail$idCharacter}'),
+              textAlign: TextAlign.right,
+              textDirection: TextDirection.ltr,
+              style: TextStyle(
+                decoration: TextDecoration.none,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
-            );
-          }
-
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                CarouselSlider(
-                  carouselController: _controllerCarousel,
-                  items: snapshot.data
-                      .map((e) {
-                        if(e is Comics) {
-                          return ItemListComics(e);
-                        }
-
-                        if(e is Series) {
-                          return ItemListSeries(e);
-                        }
-
-                        if(e is Stories) {
-                          return ItemListStories(e);
-                        }
-
-                      })
-                      .toList(),
-                  options: CarouselOptions(
-                    initialPage: 0,
-                    height: 300,
-                    enlargeCenterPage: true,
-                    autoPlay: false,
-                    aspectRatio: 16 / 9,
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enableInfiniteScroll: false,
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
-                    viewportFraction: 0.8,
-                    onPageChanged: (index, reason) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          backgroundColor: Colors.blueAccent,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
             ),
-          );
-        },
-      ),
+            StreamBuilder<Set<T>>(
+              key: Key('streamBuilderDetailItem$idCharacter'),
+              stream: bloc.output,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                    key: Key('containerErrorDetail'),
+                    child: Text(
+                      "Não há registros!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                  );
+                }
+
+                if (!snapshot.hasData) {
+                  return Center(
+                    key: Key('centerCircularProgressIndicador'),
+                    child: CircularProgressIndicator(
+                      key: Key('circularProgressIndicadorNoData'),
+                      backgroundColor: Colors.blueAccent,
+                    ),
+                  );
+                }
+
+                return Container(
+                  child: CarouselSlider(
+                    // key: Key('carouselDetails$idCharacter-$title'),
+                    carouselController: _controllerCarousel,
+                    items: snapshot.data.map((e) {
+                      if (e is Comics) {
+                        return ItemListComics(e);
+                      }
+
+                      if (e is Series) {
+                        return ItemListSeries(e);
+                      }
+
+                      if (e is Stories) {
+                        return ItemListStories(e);
+                      }
+                    }).toList(),
+                    options: CarouselOptions(
+                      height: 300,
+                      enlargeCenterPage: true,
+                      autoPlayCurve: Curves.slowMiddle,
+                      enableInfiniteScroll: false,
+                      onPageChanged: (index, reason) async {
+                        if (index == snapshot.data.length - 1 &&
+                            snapshot.data.length >= 19) {
+
+                          Center(
+                            key: Key('centerCircularProgressIndicador'),
+                            child: CircularProgressIndicator(
+                              key: Key('circularProgressIndicadorNoData'),
+                              backgroundColor: Colors.blueAccent,
+                            ),
+                          );
+
+                          offset += perPage;
+                          limit += perPage;
+
+                          bloc.getList(idCharacter,
+                              limitQParam: limit, offsetQParam: offset);
+                        }
+                      },
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
     );
   }
 }

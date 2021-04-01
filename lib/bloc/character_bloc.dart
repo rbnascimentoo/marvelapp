@@ -7,14 +7,14 @@ import 'package:marvelapp/data/services/marvel_service.dart';
 import 'package:marvelapp/models/marvel_base_response.dart';
 import 'package:marvelapp/utils/constants/message_constants.dart';
 
-class CharacterBloc extends BaseBloc<List<Character>> {
+class CharacterBloc extends BaseBloc<ContainerData> {
 
   CharactersRepository charactersRepository;
-  List<Character> listCharacter;
+  ContainerData newContainerData;
 
   CharacterBloc() {
     charactersRepository = CharactersRepository(MarvelService());
-    listCharacter = [];
+    newContainerData = ContainerData(results: {});
   }
 
   @override
@@ -22,9 +22,12 @@ class CharacterBloc extends BaseBloc<List<Character>> {
     try {
       var result = await charactersRepository.getCharacters(limitQParam, offsetQParam);
       MarvelBaseResponse response = MarvelBaseResponse.fromJsonToCharacter(result);
-      listCharacter.addAll(response.data.results as List<Character>);
-      add(listCharacter);
-      return response.data;
+      newContainerData.results.addAll(response.data.results as Set<Character>);
+      newContainerData.count = response.data.count;
+      newContainerData.limit = response.data.limit;
+      newContainerData.total = response.data.total;
+      add(newContainerData);
+      return newContainerData;
     }catch (e) {
       return null;
     }

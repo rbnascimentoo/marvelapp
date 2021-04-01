@@ -1,10 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:marvelapp/bloc/character_bloc.dart';
-import 'package:marvelapp/models/character_response.dart';
-import 'package:marvelapp/ui/widget/item_list_marvel.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:marvelapp/bloc/character_bloc.dart';
+import 'package:marvelapp/models/marvel_base_response.dart';
+import 'package:marvelapp/ui/widget/item_list_marvel.dart';
 
 //Widget principal screen
 class ListMarvel extends StatelessWidget {
@@ -19,11 +19,11 @@ class ListMarvel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CarouselController _controllerCarousel = CarouselController();
-    int _current = 0;
 
     context.showLoaderOverlay(
       widget: Text(
         "Loading...",
+        key: Key('textShowLoaderInit'),
         style: TextStyle(color: Colors.blueAccent),
       ),
     );
@@ -31,21 +31,23 @@ class ListMarvel extends StatelessWidget {
     characterBloc.getList(null, limitQParam: limit, offsetQParam: offset);
 
     return Container(
+      key: Key('containerPrincipal'),
       color: Colors.red,
-      child: StreamBuilder<List<Character>>(
+      child: StreamBuilder<ContainerData>(
+        key: Key('StreamBuilderListMarvel'),
         stream: characterBloc.output,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             context.hideLoaderOverlay();
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  "Não há registros!",
-                  style: TextStyle(decoration: TextDecoration.none),
+            return Container(
+              key: Key('containerEmptyListMarvel'),
+              child: Text(
+                "Não há registros!",
+                key: Key('textNoDataListMarvel'),
+                style: TextStyle(
+                  decoration: TextDecoration.none,
                 ),
-              ],
+              ),
             );
           }
 
@@ -53,60 +55,67 @@ class ListMarvel extends StatelessWidget {
             context.showLoaderOverlay(
               widget: Text(
                 "Loading...",
-                style: TextStyle(color: Colors.blueAccent),
+                key: Key('textShowLoaderPrincipalLoading'),
+                style: TextStyle(
+                  color: Colors.blueAccent,
+                ),
               ),
             );
             return Container(
+              key: Key('containerNullListMarvel'),
               color: Colors.red,
             );
           }
 
           context.hideLoaderOverlay();
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                CarouselSlider(
-                  carouselController: _controllerCarousel,
-                  items: snapshot.data
-                      .map((e) => Column(
-                            children: [ItemListMarvel(character: e)],
-                          ))
-                      .toList(),
-                  options: CarouselOptions(
-                    initialPage: 0,
-                    height: (MediaQuery.of(context).size.height),
-                    enlargeCenterPage: true,
-                    autoPlay: false,
-                    aspectRatio: 16 / 9,
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enableInfiniteScroll: false,
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
-                    viewportFraction: 0.8,
-                    onPageChanged: (index, reason) async {
-                      if (index == snapshot.data.length - 1) {
-                        context.showLoaderOverlay(
-                          widget: Text(
-                            "Loading...",
-                            style: TextStyle(color: Colors.blueAccent),
-                          ),
-                        );
+          return Container(
+            key: Key('containerListMarvel'),
+            child: CarouselSlider(
+              key: Key('carouselListMarvel'),
+              carouselController: _controllerCarousel,
+              items: snapshot.data.results
+                  .map((e) => Column(
+                        key: Key('columnItemListMarvel${e.id}'),
+                        children: [
+                          ItemListMarvel(character: e),
+                        ],
+                      ))
+                  .toList(),
+              options: CarouselOptions(
+                height: (MediaQuery.of(context).size.height),
+                enlargeCenterPage: true,
+                autoPlayCurve: Curves.slowMiddle,
+                enableInfiniteScroll: false,
+                onPageChanged: (index, reason) async {
+                  if (index == snapshot.data.results.length - 1 &&
+                      snapshot.data.total > snapshot.data.count) {
+                    context.showLoaderOverlay(
+                      widget: Text(
+                        "Loading...",
+                        key: Key('textShowLoaderPageCarousel'),
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                    );
 
-                        offset = offset + perPage;
-                        limit = limit + perPage;
-                        await characterBloc.getList(null,
-                            limitQParam: limit, offsetQParam: offset);
+                    offset += perPage;
+                    limit += perPage;
 
-                        context.showLoaderOverlay(
-                          widget: Text(
-                            "Loading...",
-                            style: TextStyle(color: Colors.blueAccent),
-                          ),
-                        );
-                      }
-                    },
-                  ),
-                ),
-              ],
+                    await characterBloc.getList(null,
+                        limitQParam: limit, offsetQParam: offset);
+
+                    context.showLoaderOverlay(
+                      widget: Text(
+                        "Loading...",
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
           );
         },
