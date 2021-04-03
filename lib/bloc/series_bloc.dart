@@ -21,9 +21,9 @@ class SeriesBloc extends BaseBloc<Set<Series>> {
   }
   
   @override
-  getList(String idCharacter, {int limitQParam, int offsetQParam}) async {
+  getList(String idCharacter, {int offsetQParam}) async {
     try {
-      var result = await seriesRepository.getSeries(idCharacter, limitQParam, offsetQParam);
+      var result = await seriesRepository.getSeries(idCharacter, offsetQParam);
       MarvelBaseResponse response = MarvelBaseResponse.fromJsonToSeries(result);
       listSeries.addAll(response.data.results as Set<Series>);
       add(listSeries);

@@ -1,5 +1,4 @@
 import 'package:marvelapp/data/services/marvel_service.dart';
-import 'package:marvelapp/utils/constants/message_constants.dart';
 
 class SeriesRepository {
 
@@ -7,8 +6,8 @@ class SeriesRepository {
 
   SeriesRepository(this.marvelService);
 
-  Future<dynamic> getSeries(String idCharacter, int limitQParam, int offsetQParam) async {
-    return await marvelService.getSeries(idCharacter, limitQParam, offsetQParam);
+  Future<dynamic> getSeries(String idCharacter, int offsetQParam) async {
+    return await marvelService.getSeries(idCharacter, offsetQParam);
   }
 
 }

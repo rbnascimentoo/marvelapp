@@ -1,4 +1,0 @@
-io/flutter/plugins/GeneratedPluginRegistrant.java
- io.flutter.plugins.GeneratedPluginRegistrant
-br/com/rnascimento/marvelapp/BuildConfig.java
- br.com.rnascimento.marvelapp.BuildConfig

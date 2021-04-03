@@ -7,8 +7,8 @@ class ComicsRepository {
 
   ComicsRepository(this.marvelService);
 
-  Future<dynamic> getComics(String idCharacter, int limitQParam, int offsetQParam) async {
-    return await marvelService.getComics(idCharacter, limitQParam, offsetQParam);
+  Future<dynamic> getComics(String idCharacter, int offsetQParam) async {
+    return await marvelService.getComics(idCharacter, offsetQParam);
   }
 
 }

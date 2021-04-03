@@ -18,9 +18,9 @@ class CharacterBloc extends BaseBloc<ContainerData> {
   }
 
   @override
-  getList(String idCharacter, {int limitQParam, int offsetQParam}) async {
+  getList(String idCharacter, {int offsetQParam}) async {
     try {
-      var result = await charactersRepository.getCharacters(limitQParam, offsetQParam);
+      var result = await charactersRepository.getCharacters(offsetQParam);
       MarvelBaseResponse response = MarvelBaseResponse.fromJsonToCharacter(result);
       newContainerData.results.addAll(response.data.results as Set<Character>);
       newContainerData.count = response.data.count;

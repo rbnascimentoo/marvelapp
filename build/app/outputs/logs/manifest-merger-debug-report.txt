@@ -5,7 +5,7 @@ INJECTED from /home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/
 INJECTED from /home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml:1:1-45:12
 INJECTED from /home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml:1:1-45:12
 MERGED from /home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml:1:1-45:12
-MERGED from [:path_provider] /home/rafael/AndroidStudioProjects/marvelapp/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:shared_preferences] /home/rafael/AndroidStudioProjects/marvelapp/build/shared_preferences/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.fragment:fragment:1.1.0] /home/rafael/.gradle/caches/transforms-2/files-2.1/d5dfc4106e73ac48f055fe721d18c35a/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.activity:activity:1.0.0] /home/rafael/.gradle/caches/transforms-2/files-2.1/319534a4be79b1b5daed67deb5853513/jetified-activity-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] /home/rafael/.gradle/caches/transforms-2/files-2.1/58c5bbabf48ccf521fd58d3c953710c5/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -106,8 +106,8 @@ uses-sdk
 INJECTED from /home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml
 INJECTED from /home/rafael/AndroidStudioProjects/marvelapp/android/app/src/main/AndroidManifest.xml
-MERGED from [:path_provider] /home/rafael/AndroidStudioProjects/marvelapp/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:path_provider] /home/rafael/AndroidStudioProjects/marvelapp/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] /home/rafael/AndroidStudioProjects/marvelapp/build/shared_preferences/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] /home/rafael/AndroidStudioProjects/marvelapp/build/shared_preferences/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [androidx.fragment:fragment:1.1.0] /home/rafael/.gradle/caches/transforms-2/files-2.1/d5dfc4106e73ac48f055fe721d18c35a/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] /home/rafael/.gradle/caches/transforms-2/files-2.1/d5dfc4106e73ac48f055fe721d18c35a/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.activity:activity:1.0.0] /home/rafael/.gradle/caches/transforms-2/files-2.1/319534a4be79b1b5daed67deb5853513/jetified-activity-1.0.0/AndroidManifest.xml:20:5-22:41

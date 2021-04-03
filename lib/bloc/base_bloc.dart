@@ -18,7 +18,7 @@ class BaseBloc<T> {
 
   get output => controller.stream;
 
-  getList(String idCharacter, {int limitQParam, int offsetQParam}) async {
+  getList(String idCharacter, {int offsetQParam}) async {
     return null;
   }
 

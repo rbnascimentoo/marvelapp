@@ -28,7 +28,7 @@ class ListMarvel extends StatelessWidget {
       ),
     );
 
-    characterBloc.getList(null, limitQParam: limit, offsetQParam: offset);
+    characterBloc.getList(null, offsetQParam: offset);
 
     return Container(
       key: Key('containerPrincipal'),
@@ -100,10 +100,8 @@ class ListMarvel extends StatelessWidget {
                     );
 
                     offset += perPage;
-                    limit += perPage;
 
-                    await characterBloc.getList(null,
-                        limitQParam: limit, offsetQParam: offset);
+                    await characterBloc.getList(null, offsetQParam: offset);
 
                     context.showLoaderOverlay(
                       widget: Text(

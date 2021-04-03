@@ -25,7 +25,7 @@ class CarouselMarvel<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     CarouselController _controllerCarousel = CarouselController();
 
-    bloc.getList(idCharacter, limitQParam: limit, offsetQParam: offset);
+    bloc.getList(idCharacter, offsetQParam: offset);
 
     return Container(
         key: Key('containerCarouselDetailItem$idCharacter'),
@@ -94,7 +94,7 @@ class CarouselMarvel<T> extends StatelessWidget {
                       autoPlayCurve: Curves.slowMiddle,
                       enableInfiniteScroll: false,
                       onPageChanged: (index, reason) async {
-                        if (index == snapshot.data.length - 1 &&
+                        if (index == snapshot.data.length - 3 &&
                             snapshot.data.length >= 19) {
 
                           Center(
@@ -108,8 +108,7 @@ class CarouselMarvel<T> extends StatelessWidget {
                           offset += perPage;
                           limit += perPage;
 
-                          bloc.getList(idCharacter,
-                              limitQParam: limit, offsetQParam: offset);
+                          bloc.getList(idCharacter, offsetQParam: offset);
                         }
                       },
                     ),

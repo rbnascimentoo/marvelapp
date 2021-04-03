@@ -1,12 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_interceptor/http_client_with_interceptor.dart';
 import 'package:marvelapp/utils/constants/message_constants.dart';
 import 'package:marvelapp/utils/enums/type_rest.dart';
 import 'package:marvelapp/utils/interceptor_util.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ServiceHttpUtil {
 
@@ -22,12 +21,12 @@ class ServiceHttpUtil {
         String msgFailure = MessageConstants.communicationError,
         Map<String, dynamic> qParam}) async {
 
-    String filename =  uri.replaceAll('/', '-') + '${qParam['limit']}${qParam['offset']}';
+    String filename =  uri.replaceAll('/', '-') + '${qParam['offset']}';
 
-    var cacheDir = await getTemporaryDirectory();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    if(await File(cacheDir.path + '/' + filename).exists()) {
-      return jsonDecode(File(cacheDir.path + '/' + filename).readAsStringSync());
+    if(prefs.get(filename) != null) {
+      return jsonDecode(prefs.get(filename));
     }
 
     Uri url = isHttps
@@ -42,6 +41,7 @@ class ServiceHttpUtil {
         debugPrint('Link de conexão -> $url');
         debugPrint('----------------------------------------------------------------------------');
         response = await client.get(url);
+        debugPrint('response=$response');
         break;
 
       case TypeRest.POST:
@@ -50,6 +50,7 @@ class ServiceHttpUtil {
         debugPrint('POST -> $json');
         debugPrint('----------------------------------------------------------------------------');
         response = await client.post(url, body: json);
+        debugPrint('response=$response');
         break;
 
         default:
@@ -63,10 +64,7 @@ class ServiceHttpUtil {
        throw msgFailure;
     }
 
-    var tempDir = await getTemporaryDirectory();
-    File file = new File(tempDir.path + '/' + filename);
-    file.writeAsString(response.body, flush: true, mode: FileMode.write);
-
+    await prefs.setString(filename, response.body);
     return jsonDecode(response.body);
 
   }

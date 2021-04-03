@@ -19,9 +19,9 @@ class ComicsBloc extends BaseBloc<Set<Comics>> {
   }
   
   @override
-  getList(String idCharacter, {int limitQParam, int offsetQParam}) async {
+  getList(String idCharacter, {int offsetQParam}) async {
     try {
-      var result = await comicsRepository.getComics(idCharacter, limitQParam, offsetQParam);
+      var result = await comicsRepository.getComics(idCharacter, offsetQParam);
       MarvelBaseResponse response = MarvelBaseResponse.fromJsonToComics(result);
       listComics.addAll(response.data.results as Set<Comics>);
       add(listComics);
